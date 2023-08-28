@@ -14,7 +14,6 @@ model Media {
   id          Int           @id @default(autoincrement())
   title       String
   username    String
-  Post        Post[]
   Publication Publication[]
 }
 
@@ -22,8 +21,7 @@ model Post {
   id          Int           @id @default(autoincrement())
   title       String
   text        String
-  mediaId     Int
-  Media       Media         @relation(fields: [mediaId], references: [id])
+  image       String?
   Publication Publication[]
 }
 
