@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -48,6 +48,9 @@ export class MediasRepository {
     } catch (err) {
       if (err.code === 'P2025') {
         return null;
+      }
+      if (err.code === 'P2003') {
+        throw new HttpException('Cannot delete published Media', HttpStatus.FORBIDDEN);
       }
       throw err;
     }
